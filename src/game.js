@@ -3,6 +3,7 @@ import Paddle from "./elements/paddle.js";
 import Ball from "./elements/ball.js";
 import { ArrowsControl } from "./controllers/input.js";
 import Player from "./player.js";
+import { R } from "./resource.js";
 
 export default class PongGame {
     constructor(canvas, width, height){
@@ -16,15 +17,12 @@ export default class PongGame {
     }
 
     init(){
-        this.topPaddle = new Paddle({x : 150, y : 20}, 180, 15, this);
-        this.bottomPaddle = new Paddle({x : 150, y : 600}, 180, 15, this);
-
+        
+        this.topPaddle = new Paddle(R.position.topPaddle, R.size.paddle.width, R.size.paddle.height, this);
+        this.bottomPaddle = new Paddle(R.position.bottomPaddle, R.size.paddle.width, R.size.paddle.height, this);
         this.paddles = [this.topPaddle, this.bottomPaddle];
-
-        this.ball = new Ball({x : 200, y : 200}, 25, this);
-        this.inputPlayerOne= new ArrowsControl();
-
-        this.player1 = new Player(this, this.bottomPaddle, this.inputPlayerOne);
+        this.ball = new Ball(R.position.ball, R.size.ball.radius, this);
+        this.player1 = new Player(this, this.bottomPaddle, new ArrowsControl());
     }
     update(deltaTime){
         this.ball.update();

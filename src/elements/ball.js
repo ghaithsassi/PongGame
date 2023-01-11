@@ -1,3 +1,5 @@
+import { R } from "../resource.js";
+import { randomInt } from "../utils.js";
 export default class Ball {
     constructor(position, radius, game){
         this.x = position.x;
@@ -5,8 +7,8 @@ export default class Ball {
         this.radius = radius;
         this.game = game;
 
-        this.vx = 2;
-        this.vy = -1;
+        this.vx = randomInt(-R.speed.max.ball.vx, R.speed.max.ball.vx);
+        this.vy = randomInt(-R.speed.max.ball.vy, R.speed.max.ball.vy);
     }
 
     update(){
